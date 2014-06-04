@@ -10,25 +10,34 @@ import docopt
 
 
 def run_server(args):
-    server_socket = socket.socket()
-    server_socket.bind((args['<address>'], 8000))
-    server_socket.listen(0)
-
-    connection = server_socket.accept()[0].makefile('rb')
-
     try:
-        with picamera.PiCamera() as camera:
-            camera.resolution = (640, 480)
+        server_socket = socket.socket()
+        server_socket.bind((args['<address>'], 8000))
+        server_socket.listen(0)
+    except BaseException:
+        print 'failed to opene the socket.'
+        print BaseException.message
+        return -1
+    print 'started up the socket.'
 
-            camera.start_preview()
-            time.sleep(2)
+    while True:
+        connection = server_socket.accept()[0].makefile('rb')
+        print 'accepting a connection.'
 
-            camera.start_recording(connection, format='h264')
-            camera.wait_recording(60)
-            camera.stop_recording()
-    finally:
-        connection.close()
-        server_socket.close()
+        try:
+            with picamera.PiCamera() as camera:
+                camera.resolution = (640, 480)
+
+                camera.start_preview()
+                time.sleep(2)
+                print 'starting to record.'
+                camera.start_recording(connection, format='h264')
+                camera.wait_recording(60)
+                camera.stop_recording()
+                print 'stopped recording.'
+        finally:
+            connection.close()
+            print 'closed the connection.'
 
 if __name__ == '__main__':
     args = docopt.docopt(__doc__)
