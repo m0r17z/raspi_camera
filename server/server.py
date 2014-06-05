@@ -33,7 +33,11 @@ def run_server(args):
                 print 'starting to record.'
                 camera.start_recording(connection, format='h264')
                 camera.wait_recording(60)
-                camera.stop_recording()
+                try:
+                    camera.stop_recording()
+                except Exception, e:
+	                print e.message
+	                print 'maybe the pipe is broken.'
                 print 'stopped recording.'
         finally:
 	        try:
