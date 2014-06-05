@@ -22,7 +22,7 @@ def run_server(args):
 
     while True:
         connection = server_socket.accept()[0].makefile('rb')
-        print 'accepting a connection.'
+        print 'waiting for a connection.'
 
         try:
             with picamera.PiCamera() as camera:
@@ -44,7 +44,7 @@ def run_server(args):
 	        except Exception, e:
 		        print 'maybe the pipe is broken.'
 
-        print 'closed the connection.'
+        print 'closed the connection.\nwaiting for a new connection.'
 
 if __name__ == '__main__':
     args = docopt.docopt(__doc__)
