@@ -39,13 +39,13 @@ def run_server(args):
 					camera.wait_recording(60)
 					camera.stop_recording()
 				except Exception, e:
-					print 'maybe the pipe is broken.'
+					print 'can\'t record properly. maybe the pipe is broken.'
 				print 'stopped recording.'
 		finally:
 			try:
 				connection.close()
 			except Exception, e:
-				print 'maybe the pipe is broken.'
+				print 'can\'t close the connection properly. maybe the pipe is broken.'
 
 		print 'closed the connection.\nwaiting for a new connection.'
 

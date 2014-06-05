@@ -29,7 +29,8 @@ def run_client(args):
         while True:
             data = connection.read(1024)
             if not data:
-                break
+	            print 'data stopped coming in.'
+            break
             try:
 	            player.stdin.write(data)
             except Exception, e:
