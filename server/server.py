@@ -36,7 +36,6 @@ def run_server(args):
                     camera.wait_recording(60)
                     camera.stop_recording()
                 except Exception, e:
-	                print e.message
 	                print 'maybe the pipe is broken.'
                 print 'stopped recording.'
         finally:
@@ -44,7 +43,6 @@ def run_server(args):
 		        connection.close()
 	        except Exception, e:
 		        print 'maybe the pipe is broken.'
-		        print e.message
 
         print 'closed the connection.'
 

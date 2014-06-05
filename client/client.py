@@ -30,7 +30,10 @@ def run_client(args):
             data = connection.read(1024)
             if not data:
                 break
-            player.stdin.write(data)
+            try:
+	            player.stdin.write(data)
+            except Exception, e:
+	            print 'player is broken.'
 
     finally:
         connection.close()
