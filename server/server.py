@@ -28,6 +28,8 @@ def run_server(args):
 		try:
 			with picamera.PiCamera() as camera:
 				camera.resolution = (1024, 768)
+				# automatic mode
+				camera.ISO = 0
 
 				camera.start_preview()
 				time.sleep(2)
