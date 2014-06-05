@@ -14,9 +14,9 @@ def run_server(args):
         server_socket = socket.socket()
         server_socket.bind((args['<address>'], 8000))
         server_socket.listen(0)
-    except BaseException:
-        print 'failed to opene the socket.'
-        print BaseException.message
+    except Exception, e:
+        print 'failed to open the socket.'
+        print e.message
         return -1
     print 'started up the socket.'
 
@@ -36,8 +36,12 @@ def run_server(args):
                 camera.stop_recording()
                 print 'stopped recording.'
         finally:
-            connection.close()
-            print 'closed the connection.'
+	        try:
+		        connection.close()
+	        except Exception, e:
+		        print e.message
+
+        print 'closed the connection.'
 
 if __name__ == '__main__':
     args = docopt.docopt(__doc__)

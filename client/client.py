@@ -12,9 +12,9 @@ def run_client(args):
     try:
         client_socket = socket.socket()
         client_socket.connect((args['<address>'], 8000))
-    except BaseException:
+    except Exception, e:
         print 'failed to connect.'
-        print BaseException.message
+        print e.message
         return -1
     print 'successfully connected.'
 
