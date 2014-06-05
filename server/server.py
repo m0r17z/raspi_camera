@@ -31,6 +31,7 @@ def run_server(args):
 				# automatic mode
 				camera.ISO = 0
 
+				print 'showing preview.'
 				camera.start_preview()
 				time.sleep(2)
 				print 'starting to record.'
